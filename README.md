@@ -1,1 +1,1 @@
-# pay2slay
+# akash_skeleton
