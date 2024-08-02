@@ -1,13 +1,10 @@
-version: '3.3'
-
 services:
   akash-deploy:
     build: .
     entrypoint: ./entrypoint.sh
     environment:
-      - AKASH_SEED_PHRASE=${AKASH_SEED_PHRASE}
-      - AKASH_KEY_NAME=${AKASH_KEY_NAME}
-      - AKASH_KEYRING_PASSPHRASE=${AKASH_KEYRING_PASSPHRASE}
-      - TF_ORG_NAME=${TF_ORG_NAME}
-      # - TF_WORKSPACE=${TF_WORKSPACE}
-      - TF_TOKEN_app_terraform_io=${TF_TOKEN_app_terraform_io}
+      AKASH_SEED_PHRASE: $AKASH_SEED_PHRASE
+      AKASH_KEY_NAME: $AKASH_KEY_NAME
+      AKASH_KEYRING_PASSPHRASE: $AKASH_KEYRING_PASSPHRASE
+      TF_ORG_NAME: $TF_ORG_NAME
+      TF_TOKEN_app_terraform_io: $TF_TOKEN_app_terraform_io

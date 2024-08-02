@@ -2,8 +2,6 @@
 # for
 # 1. Providing a central place to build and push service images
 # 2. Running the services locally for development and testing
-version: '3.3'
-
 services:
   banano-node:
     build: fullfillment/banano/node/.
