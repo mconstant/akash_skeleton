@@ -5,6 +5,11 @@ set -euo pipefail
 
 source akash_settings.sh
 
+# terraform or tofu
+terraform_or_tofu="terraform"
+
+TERRAFORM_VERSION=1.9.2
+
 check_mark=$(printf '\342\234\224' | iconv -f UTF-8 2> /dev/null) ||
   check_mark='[X]'
 
@@ -64,13 +69,13 @@ cat dev.auto.tfvars
 echo
 
 echo "-------------- Terraform Init --------------"
-terraform init -backend-config="organization=${TF_ORG_NAME}"
+$terraform_or_tofu init -backend-config="organization=${TF_ORG_NAME}"
 echo $check_mark
 
 echo "-------------- Terraform Plan --------------"
-terraform plan 
+$terraform_or_tofu plan 
 echo $check_mark
 
 echo "-------------- Terraform Apply --------------"
-terraform apply -auto-approve 
+$terraform_or_tofu apply -auto-approve 
 echo $check_mark

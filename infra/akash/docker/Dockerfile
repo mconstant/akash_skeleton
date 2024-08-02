@@ -28,12 +28,18 @@ RUN echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
 # Update and install Terraform.
 RUN apt-get update && apt-get install -y terraform
 
+# install opentofu
+# RUN wget --secure-protocol=TLSv1_2 --https-only https://get.opentofu.org/install-opentofu.sh -O install-opentofu.sh
+# RUN chmod +x install-opentofu.sh
+# RUN ./install-opentofu.sh --install-method deb
+# RUN rm install-opentofu.sh
+
 # copy *.tf files in ../../ to /terraform directory we don't want the akash directory
 COPY ./terraform /terraform
 RUN ls -la /terraform
 
 # copy sdl.yaml to /akash directory
-COPY ./sdl.yaml /akash/sdl.yaml
+# COPY ./sdl.yaml /akash/sdl.yaml
 
 COPY ./akash_settings.sh akash_settings.sh
 COPY ./entrypoint.sh entrypoint.sh
