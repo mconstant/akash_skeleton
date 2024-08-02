@@ -41,8 +41,8 @@ RUN ls -la /terraform
 # copy sdl.yaml to /akash directory
 # COPY ./sdl.yaml /akash/sdl.yaml
 
-COPY ./akash_settings.sh akash_settings.sh
-COPY ./entrypoint.sh entrypoint.sh
+COPY ./akash_settings.sh ./akash_settings.sh
+COPY ./entrypoint.sh ./entrypoint.sh
 
 RUN chmod +x entrypoint.sh
 
