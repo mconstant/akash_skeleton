@@ -34,4 +34,4 @@ jobs:
     - name: Build and run Docker Compose
       run: |
         cd infra/akash/docker
-        docker-compose up -d
+        docker compose up -d
