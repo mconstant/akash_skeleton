@@ -1,4 +1,4 @@
-name: Deploy to Akash
+name: Destroy Akash Deployment
 
 on:
   workflow_dispatch:
@@ -34,4 +34,4 @@ jobs:
     - name: Build and run Docker Compose
       run: |
         cd infra/akash/docker
-        docker compose up akash-deploy
+        docker compose up akash-destroy
