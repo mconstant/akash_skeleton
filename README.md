@@ -3,7 +3,7 @@
 ## prereqs
 
 1. create an akash wallet and fund it with maybe 0.75 AKT or more to ensure you have enough for deployment escrow. Copy the mnemonic.
-2. 
+2. Click the green `Use This Template` button in this project and choose `Create a new repository`
 3. make an account on Terraform cloud
    - make an Organization and keep track of your org name
    - inside the org make a workspace under the `default` project called `deploy` choose `API-Based` for the workspace type
