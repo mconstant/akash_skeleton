@@ -1,0 +1,50 @@
+name: Version Trigger Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get commit message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
+
+      - name: Determine version type
+        id: determine_version_type
+        run: |
+          if [[ "$commit_message" == *"<PATCH>"* ]]; then
+            echo "VERSION_TYPE=PATCH" >> $GITHUB_ENV
+          elif [[ "$commit_message" == *"<MINOR>"* ]]; then
+            echo "VERSION_TYPE=MINOR" >> $GITHUB_ENV
+          elif [[ "$commit_message" == *"<MAJOR>"* ]]; then
+            echo "VERSION_TYPE=MAJOR" >> $GITHUB_ENV
+          else
+            echo "No version type found in commit message."
+            exit 1
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set environment variables
+        run: |
+          echo "AKASH_SEED_PHRASE=${{ secrets.AKASH_SEED_PHRASE }}" >> $GITHUB_ENV
+          echo "AKASH_KEY_NAME=${{ secrets.AKASH_KEY_NAME }}" >> $GITHUB_ENV
+          echo "AKASH_KEYRING_PASSPHRASE=${{ secrets.AKASH_KEYRING_PASSPHRASE }}" >> $GITHUB_ENV
+          echo "TF_ORG_NAME=${{ secrets.TF_ORG_NAME }}" >> $GITHUB_ENV
+          echo "TF_TOKEN_app_terraform_io=${{ secrets.TF_TOKEN_app_terraform_io }}" >> $GITHUB_ENV
+
+      - name: Tag patch and deploy
+        run: |
+          cd app && make deploy VERSION_TYPE=$VERSION_TYPE
