@@ -19,3 +19,4 @@ jobs:
           uses: AndreasAugustin/actions-template-sync@v2
           with:
             source_repo_path: mconstant/akash_skeleton
+            github_token: ${{ secrets.WORKFLOW_TOKEN }}
