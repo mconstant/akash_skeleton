@@ -1,10 +1,10 @@
-"services":
-  "example-deployment":
-    "build": "./example-deployment/."
-    "container_name": "example-deployment"
-    "environment":
-      "MESSAGE": "jam the funk"
-    "image": "xmconstantx/example-deployment"
-    "platform": "linux/amd64"
-    "ports":
-    - "3000:3000"
+services:
+  example-deployment:
+    build: ./example-deployment/.
+    container_name: example-deployment
+    environment:
+      TOP_SECRET_MESSAGE: $TOP_SECRET_MESSAGE
+    image: xmconstantx/example-deployment:0.0.0
+    platform: linux/amd64
+    ports:
+    - 3000:3000

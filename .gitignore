@@ -26,3 +26,5 @@ terraform.rc
 
 # python virtualenv
 venv/
+
+akash-sdl.yml

@@ -6,19 +6,27 @@ initialize_venv:
 	pip install -r requirements.txt
 
 configs:
-	python3 config_gen.py
+	python3 scripts/config_gen.py
 
 build: configs
 	docker compose build
 
 up: build
-	docker compose up
+	docker compose up --remove-orphans
+
+down:
+	docker compose down
 
 push: build
 	docker compose push
 
 load_sdl: push
-	
 
 deploy: push
-	cd ../infra/akash/docker && docker compose up
+	cd ../infra/akash/docker && docker compose 
+
+publish_patch:
+	python3 scripts/increment_version.py PATCH
+	$(MAKE) push
+
+publish_minor:

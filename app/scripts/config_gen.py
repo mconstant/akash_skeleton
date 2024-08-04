@@ -1,16 +1,21 @@
 # -*- coding: utf-8 -*-
+import os
+from dotenv import load_dotenv
 from yaml import load, dump
+
+load_dotenv()
+
 try:
     from yaml import CLoader as Loader, CDumper as Dumper
 except ImportError:
     from yaml import Loader, Dumper
-from yaml.representer import SafeRepresenter
+# from yaml.representer import SafeRepresenter
 
-class StringValueDumper(Dumper):
-    def represent_str(self, data):
-        return self.represent_scalar('tag:yaml.org,2002:str', data, style='"')
+# class StringValueDumper(Dumper):
+#     def represent_str(self, data):
+#         return self.represent_scalar('tag:yaml.org,2002:str', data, style='"')
 
-StringValueDumper.add_representer(str, StringValueDumper.represent_str)
+# StringValueDumper.add_representer(str, StringValueDumper.represent_str)
 splash = """
                                    /##                                                        
                                   #/ ###   #                                                   
@@ -62,14 +67,14 @@ for app in apps:
     # add the service config to the docker-compose map
     docker_compose_out["services"][service_name] = service_config['docker_compose']
     env_vars = app[service_name]["env"]
-    docker_compose_out["services"][service_name]["image"] = service_config['image']  
+    docker_compose_out["services"][service_name]["image"] = f"{service_config['image']}:{os.environ['VERSION']}"  
     docker_compose_out["services"][service_name]["environment"] = env_vars
     ports = []
     for port in app[service_name]["ports"]:
         ports.append(f"{port['source']}:{port['target']}")
     docker_compose_out["services"][service_name]["ports"] = ports
 print("Generating docker-compose.yml")
-docker_compose_file_contents = dump(docker_compose_out, Dumper=StringValueDumper)
+docker_compose_file_contents = dump(docker_compose_out, Dumper=Dumper)
 
 with open('docker-compose.yml', 'w') as f:
     f.write(docker_compose_file_contents)
@@ -86,12 +91,13 @@ for app in apps:
     akash_sdl_out["services"][service_name] = service_config['akash']
     env_vars = app[service_name]["env"]
     akash_sdl_out["services"][service_name]["env"] = env_vars
+    akash_sdl_out["services"][service_name]["image"] = f"{service_config['image']}:{os.environ['VERSION']}"  
     ports = []
     for port in app[service_name]["ports"]:
         ports.append({"number": port["source"], "protocol": "TCP"})
     akash_sdl_out["services"][service_name]["expose"] = ports
 
 with open('akash-sdl.yml', 'w') as f:
-    f.write(dump(akash_sdl_out, Dumper=StringValueDumper))
+    f.write(dump(akash_sdl_out, Dumper=Dumper))
 
 print("akash-sdl.yml generated")

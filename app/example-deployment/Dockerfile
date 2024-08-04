@@ -1,6 +1,6 @@
 FROM node:18-slim
 
-ENV MESSAGE=$MESSAGE
+ENV TOP_SECRET_MESSAGE=$TOP_SECRET_MESSAGE
 
 # Create app directory
 WORKDIR /usr/src/app

@@ -2,7 +2,7 @@
 - example-deployment:
     image: xmconstantx/example-deployment
     env:
-      MESSAGE: "jam the funk"
+      TOP_SECRET_MESSAGE: $TOP_SECRET_MESSAGE
     ports:
       - source: 3000
         target: 3000
