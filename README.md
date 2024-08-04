@@ -39,3 +39,5 @@ Under "Actions > General" scroll down to "Workflow Permissions".
 Select the "Read and write permissions" and check the box that says "Allow GitHub Actions to create and approve pull requests"
 In the "Repository permissions" section, check the "Read & write" permission for the "Workflows" option.
 Click on "Save changes".```
+
+Also you need to generate a classic PAT (personal access token) with workflow capabilities and store it in the Actions Secret `WORKFLOW_TOKEN`
