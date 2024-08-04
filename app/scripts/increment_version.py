@@ -44,7 +44,7 @@ version = [str(i) for i in version]
 version = '.'.join(version)
 
 # print the new version
-print(f"New version: {version}")
+print(version)
 
 # write the new version to the .env file
 with open('.env', 'r') as f:
@@ -59,6 +59,3 @@ with open('.env', 'w') as f:
 
 # export the new version as an environment variable
 os.environ['VERSION'] = version
-
-print("Version updated in .env file")
-print("Version exported as an environment variable")

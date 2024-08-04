@@ -1,3 +1,5 @@
+include .env
+
 default: configs
 
 initialize_venv:
@@ -26,18 +28,14 @@ deploy: push
 	cd ../infra/akash/docker && docker compose 
 
 publish_patch:
-	# Check that git staging area is clean
 	git diff-index --quiet HEAD
-	python3 scripts/increment_version.py PATCH
-	$(MAKE) configs
-	git add .
-	git commit -m "Bump version to ${VERSION}"
-	# tag the commit
-	git tag -a "${VERSION}" -m "Version ${VERSION}"
-	# push the commit and tag
-	git push origin main
-	git push origin "${VERSION}"
-	# push the image
+	NEW_VERSION=$$(python3 scripts/increment_version.py PATCH); \
+	$(MAKE) configs; \
+	git add .; \
+	git commit -m "Bump version to $$NEW_VERSION"; \
+	git tag -a "$$NEW_VERSION" -m "Version $$NEW_VERSION"; \
+	git push origin main; \
+	git push origin "$$NEW_VERSION"; \
 	$(MAKE) push
 
 publish_minor:
