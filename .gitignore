@@ -28,3 +28,4 @@ terraform.rc
 venv/
 
 akash-sdl.yml
+app/akash-sdl.yml

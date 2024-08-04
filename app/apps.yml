@@ -13,8 +13,10 @@
       platform: linux/amd64
     akash:
       compute:
-        cpu_units: 2
-        memory_size: 512Mi
+        cpu:
+          units: 2
+        memory:
+          size: 512Mi
         storage:
           size: 512Mi
           persistent: false

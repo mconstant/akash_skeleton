@@ -1,6 +1,6 @@
 include .env
 
-.PHONY: publish
+.PHONY: publish, deploy
 
 default: configs
 
@@ -26,18 +26,25 @@ push: build
 
 load_sdl: push
 
-deploy: push
-	cd ../infra/akash/docker && docker compose 
+deploy:
+	$(MAKE) publish VERSION_TYPE=$(VERSION_TYPE)
+	$(MAKE) push
+	cp akash-sdl.yml ../infra/akash/docker/terraform/akash-sdl.yml
+	cd ../infra/akash/docker && docker compose build akash-deploy && docker compose down && docker compose up akash-deploy
+
+destroy:
+	cd ../infra/akash/docker && docker compose down && docker compose up akash-destroy
+
+increment_patch:
+	python3 scripts/increment_version.py PATCH
 
 publish:
 	git diff-index --quiet HEAD
 	NEW_VERSION=$$(python3 scripts/increment_version.py $(VERSION_TYPE)); \
 	$(MAKE) configs; \
 	git add .; \
-	git commit -m "Bump version to $$NEW_VERSION"; \
+	git commit -m "Release $(VERSION_TYPE) version $$NEW_VERSION"; \
 	git tag -a "$$NEW_VERSION" -m "Version $$NEW_VERSION"; \
 	git push origin main; \
 	git push origin "$$NEW_VERSION"; \
 	$(MAKE) push
-
-publish_minor:
