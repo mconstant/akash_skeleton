@@ -35,6 +35,7 @@
 ```You need to grant the workflows permission to your GitHub App.
 
 Go to the settings page of your GitHub App.
-Under "Permissions & events", click on "Configure permissions".
+Under "Actions > General" scroll down to "Workflow Permissions".
+Select the "Read and write permissions" and check the box that says "Allow GitHub Actions to create and approve pull requests"
 In the "Repository permissions" section, check the "Read & write" permission for the "Workflows" option.
 Click on "Save changes".```
