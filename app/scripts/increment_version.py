@@ -2,7 +2,7 @@
 
 # take in an argument from the command line
 import sys
-import dotenv as load_dotenv
+from dotenv import load_dotenv
 import os
 
 load_dotenv()
@@ -45,6 +45,10 @@ version = '.'.join(version)
 
 # print the new version
 print(f"New version: {version}")
+
+# write the new version to the .env file
+with open('.env', 'r') as f:
+    lines = f.readlines()
 
 with open('.env', 'w') as f:
     for line in lines:
