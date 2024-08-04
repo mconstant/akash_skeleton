@@ -43,7 +43,9 @@ RUN ls -la /terraform
 
 COPY ./akash_settings.sh ./akash_settings.sh
 COPY ./entrypoint.sh ./entrypoint.sh
+COPY ./destroy.sh ./destroy.sh
 
 RUN chmod +x entrypoint.sh
+RUN chmod +x destroy.sh
 
 ENTRYPOINT ["./entrypoint.sh"]
