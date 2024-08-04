@@ -4,7 +4,7 @@ services:
     container_name: example-deployment
     environment:
       TOP_SECRET_MESSAGE: $TOP_SECRET_MESSAGE
-    image: xmconstantx/example-deployment:0.0.2
+    image: xmconstantx/example-deployment:0.0.3
     platform: linux/amd64
     ports:
     - 3000:3000
