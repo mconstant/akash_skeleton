@@ -31,12 +31,12 @@ publish_patch:
 	python3 scripts/increment_version.py PATCH
 	$(MAKE) configs
 	git add .
-	git commit -m "Bump version to $(shell cat VERSION)"
+	git commit -m "Bump version to ${VERSION}"
 	# tag the commit
-	git tag -a $(shell cat VERSION) -m "Version $(shell cat VERSION)"
+	git tag -a "${VERSION}" -m "Version ${VERSION}"
 	# push the commit and tag
 	git push origin main
-	git push origin $(shell cat VERSION)
+	git push origin "${VERSION}"
 	# push the image
 	$(MAKE) push
 
