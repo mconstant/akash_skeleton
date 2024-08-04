@@ -2,11 +2,10 @@
 
 # take in an argument from the command line
 import sys
+import dotenv as load_dotenv
 import os
 
-# unfreeze the VERSION env var
-# this will allow us to change it
-os.environ['VERSION'] = os.environ['VERSION']
+load_dotenv()
 
 # input can be PATCH, MINOR, or MAJOR
 # PATCH will increment the last number in the version
