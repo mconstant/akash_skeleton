@@ -1,0 +1,20 @@
+# This docker-compose file is used
+# for
+# 1. Providing a central place to build and push service images
+# 2. Running the services locally for development and testing
+services:
+  banano-node:
+    build: fullfillment/banano/node/.
+    image: banano-node
+    container_name: banano-node
+    platform: linux/amd64
+    environment:
+      - CONFIG_NODE_WEBSOCKET_ENABLE=true
+      - CONFIG_NODE_RPC_ENABLE=true
+      # - CONFIG_SNAPSHOT_URL=https://ledgerfiles.moonano.net/files/latest.tar.gz
+      - CONFIG_RPC_ENABLE_CONTROL=false
+      - CONFIG_NODE_ROCKSDB_ENABLE=true
+    ports:
+      - "7071:7071"
+      - "7072:7072"
+      - "7074:7074"

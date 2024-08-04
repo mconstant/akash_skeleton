@@ -1,0 +1,51 @@
+---
+version: "2.0"
+
+services:
+  banano-node:
+    image: xmconstantx/configurable-bananode:latest
+    env:
+      - CONFIG_NODE_WEBSOCKET_ENABLE=true
+      - CONFIG_NODE_RPC_ENABLE=true
+      - CONFIG_RPC_ENABLE_CONTROL=false
+      - CONFIG_NODE_ROCKSDB_ENABLE=true
+      - CONFIG_SNAPSHOT_URL=https://ledgerfiles.moonano.net/files/latest.tar.gz
+    expose:
+      - port: 7071
+        to:
+          - global: false
+      - port: 7072
+        to:
+          - global: true
+      - port: 7074
+        to:
+          - global: false
+profiles:
+  compute:
+    banano-node:
+      resources:
+        cpu:
+          units: 2
+        memory:
+          size: 512Mi
+        storage:
+          size: 50Gi
+          persistent: true
+          class: beta2
+  placement:
+    akash:
+      attributes:
+        host: akash
+      signedBy:
+        anyOf:
+          - "akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63"
+          - "akash18qa2a2ltfyvkyj0ggj3hkvuj6twzyumuaru9s4"
+      pricing:
+        banano-node: 
+          denom: uakt
+          amount: 1000
+deployment:
+  banano-node:
+    akash:
+      profile: banano-node
+      count: 1
