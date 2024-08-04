@@ -20,7 +20,7 @@
 
 1. Run the Deploy Github action
 
-## View your deployment
+## view your deployment
     - Go to https://console.akash.network/deployments
     - Click Connect Wallet
     - Connect your Akash Wallet you deployed with
@@ -29,3 +29,12 @@
     - Click `Create Certificate`
     - Click `Approve`
     - Click `Logs`
+
+## to allow your copied template repo to automatically get pull requests from the original template as we update it
+
+```You need to grant the workflows permission to your GitHub App.
+
+Go to the settings page of your GitHub App.
+Under "Permissions & events", click on "Configure permissions".
+In the "Repository permissions" section, check the "Read & write" permission for the "Workflows" option.
+Click on "Save changes".```
