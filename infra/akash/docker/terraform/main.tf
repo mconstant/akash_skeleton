@@ -45,7 +45,7 @@ profiles:
       pricing:
         banano-node: 
           denom: uakt
-          amount: 100
+          amount: 1000
 deployment:
   banano-node:
     akash:
