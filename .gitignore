@@ -29,3 +29,6 @@ venv/
 
 akash-sdl.yml
 app/akash-sdl.yml
+
+# secrets only you should know
+repo_secrets.yml
