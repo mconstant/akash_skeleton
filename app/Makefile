@@ -1,5 +1,7 @@
 include .env
 
+.PHONY: publish
+
 default: configs
 
 initialize_venv:
@@ -27,9 +29,9 @@ load_sdl: push
 deploy: push
 	cd ../infra/akash/docker && docker compose 
 
-publish_patch:
+publish:
 	git diff-index --quiet HEAD
-	NEW_VERSION=$$(python3 scripts/increment_version.py PATCH); \
+	NEW_VERSION=$$(python3 scripts/increment_version.py $(VERSION_TYPE)); \
 	$(MAKE) configs; \
 	git add .; \
 	git commit -m "Bump version to $$NEW_VERSION"; \
