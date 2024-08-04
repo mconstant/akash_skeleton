@@ -32,6 +32,8 @@ profiles:
           size: 512Mi
         storage:
           size: 50Gi
+          persistent: true
+          class: beta2
   placement:
     akash:
       attributes:
