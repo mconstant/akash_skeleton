@@ -40,7 +40,6 @@ increment_patch:
 
 publish:
 	NEW_VERSION=$$(python3 scripts/increment_version.py $(VERSION_TYPE)); \
-	$(MAKE) configs; \
 	git add .; \
 	git commit -m "Release $(VERSION_TYPE) version $$NEW_VERSION"; \
 	git tag -a "$$NEW_VERSION" -m "Version $$NEW_VERSION"; \

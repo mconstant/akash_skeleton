@@ -55,7 +55,7 @@
     "image": "xmconstantx/example-deployment:0.0.3"
   "my-ghost":
     "env":
-    - "url='https://ghost.tater.cc'"
+    - "url=https://ghost.tater.cc"
     "expose":
     - "accept": "ghost.tater.cc"
       "port": 2368
