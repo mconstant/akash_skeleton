@@ -42,7 +42,8 @@
       - source: 2368
         target: 2368
         global: true
-        accept: "ghost.tater.cc"
+        accept: 
+        - "ghost.tater.cc"
     docker_compose:
       build: ./my-ghost/.
       container_name: my-ghost
