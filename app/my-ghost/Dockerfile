@@ -1,1 +1,1 @@
-FROM ghost:4.36.3-alpine
+FROM ghost:5.88.3-alpine

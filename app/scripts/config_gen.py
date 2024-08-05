@@ -119,6 +119,7 @@ for app in apps:
     service = {service_name: {}}
     service[service_name]['image'] = f"{app[service_name]['image']}:{os.environ['VERSION']}"
     resolved_env_vars = {}
+    env_vars = app[service_name]["env"]
     for key, value in env_vars.items():
         if key in os.environ:
             resolved_env_vars[key] = os.environ[key]
@@ -126,7 +127,11 @@ for app in apps:
             resolved_env_vars[key] = value
     array_of_env_var_strings = []
     for key, value in resolved_env_vars.items():
-        array_of_env_var_strings.append(f"{key}='{value}'")
+        # if value has spaces, wrap it in single quotes
+        if ' ' in value:
+            array_of_env_var_strings.append(f"{key}='{value}'")
+        else:
+            array_of_env_var_strings.append(f"{key}={value}")
     service[service_name]['env'] = array_of_env_var_strings
     exposed_ports = []
     for port in app[service_name]['ports']:
@@ -136,6 +141,8 @@ for app in apps:
                 {'global': port['global']}
                 ]
         }
+        if 'as' in port and port['as'] is not None:
+            resolved_port['as'] = port['as']
         if 'accept' in port and port['accept'] is not None:
             resolved_port['accept'] = port['accept']
         exposed_ports.append(resolved_port)

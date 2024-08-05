@@ -47,7 +47,7 @@
 "services":
   "example-deployment":
     "env":
-    - "url='https://ghost.tater.cc'"
+    - "TOP_SECRET_MESSAGE='My secret'"
     "expose":
     - "port": 3000
       "to":
@@ -55,10 +55,11 @@
     "image": "xmconstantx/example-deployment:0.0.7"
   "my-ghost":
     "env":
-    - "url='https://ghost.tater.cc'"
+    - "url=https://ghost.tater.cc"
     "expose":
     - "accept":
       - "ghost.tater.cc"
+      "as": 80
       "port": 2368
       "to":
       - "global": true

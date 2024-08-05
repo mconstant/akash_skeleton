@@ -41,6 +41,7 @@
     ports:
       - source: 2368
         target: 2368
+        as: 80
         global: true
         accept: 
         - "ghost.tater.cc"
