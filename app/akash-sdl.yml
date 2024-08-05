@@ -1,29 +1,39 @@
-services:
-  example-deployment:
-    compute:
-      cpu_units: 2
-      memory_size: 512Mi
-      storage:
-        class: default
-        persistent: false
-        size: 512Mi
-    deployment:
-      count: 1
-    env:
-      TOP_SECRET_MESSAGE: $TOP_SECRET_MESSAGE
-    expose:
-    - number: 3000
-      protocol: TCP
-    image: xmconstantx/example-deployment:0.0.2
-    placement:
-      akash:
-        attributes:
-          host: akash
-        signedBy:
-          anyOf:
-          - akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63
-          - akash18qa2a2ltfyvkyj0ggj3hkvuj6twzyumuaru9s4
-      pricing:
-        amount: 1000
-        denom: uakt
-version: '2.0'
+"deployment":
+  "example-deployment":
+    "akash":
+      "count": 1
+      "profile": "example-deployment"
+"profiles":
+  "compute":
+    "example-deployment":
+      "resources":
+        "cpu":
+          "units": 2
+        "memory":
+          "size": "512Mi"
+        "storage":
+          "class": "default"
+          "persistent": false
+          "size": "512Mi"
+  "placement":
+    "akash":
+      "attributes":
+        "host": "akash"
+      "pricing":
+        "example-deployment":
+          "amount": 1000
+          "denom": "uakt"
+      "signedBy":
+        "anyOf":
+        - "akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63"
+        - "akash18qa2a2ltfyvkyj0ggj3hkvuj6twzyumuaru9s4"
+"services":
+  "example-deployment":
+    "env":
+    - "TOP_SECRET_MESSAGE='This is another secret message'"
+    "expose":
+    - "port": 3000
+      "to":
+      - "global": true
+    "image": "xmconstantx/example-deployment:0.0.0"
+"version": "2.0"
