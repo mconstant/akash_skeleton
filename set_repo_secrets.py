@@ -2,15 +2,18 @@ import requests
 import yaml
 import base64
 import json
+import nacl.public
 from getpass import getpass
 
 def prompt_for_pat():
-    print("To use this script, you need a GitHub Personal Access Token (PAT) with the following scopes:")
-    print("- repo (Full control of private repositories)")
-    print("- admin:repo_hook (Full control of repository hooks)")
+    print("To use this script, you need a Fine Grained GitHub Personal Access Token (PAT) with the following scopes:")
+    print("- ability to write to Actions Secrets for this repository") ")
     print("You can create a PAT here: https://github.com/settings/tokens")
     pat = getpass("Enter your GitHub Personal Access Token (PAT): ")
-    return pat
+    print("Optionally you can also sync with the original template repo")
+    print("For this you will need a classic PAT with workflow scope")
+    pat_classic = getpass("Enter optional classic Workflow scoped GitHub Personal Access Token (PAT) to sync with the original template repo: ")
+    return pat, pat_classic
 
 def read_secrets(file_path):
     with open(file_path, 'r') as file:
@@ -40,7 +43,7 @@ def add_secret(repo, secret_name, encrypted_value, key_id, headers):
     print(f"Secret '{secret_name}' added successfully.")
 
 def main():
-    pat = prompt_for_pat()
+    pat, pat_classic = prompt_for_pat()
     repo = input("Enter the repository name (e.g., username/repo): ")
     headers = {
         "Authorization": f"token {pat}",
@@ -54,5 +57,6 @@ def main():
         encrypted_value = encrypt_secret(public_key, secret_value)
         add_secret(repo, secret_name, encrypted_value, public_key["key_id"], headers)
 
+    add_secret(repo, "WORKFLOW_TOKEN", pat_classic, public_key["key_id"], headers) 
 if __name__ == "__main__":
     main()
