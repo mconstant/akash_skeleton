@@ -3,6 +3,7 @@ import yaml
 import base64
 import json
 import nacl.public
+import subprocess
 from getpass import getpass
 
 def prompt_for_pat():
@@ -44,7 +45,9 @@ def add_secret(repo, secret_name, encrypted_value, key_id, headers):
 
 def main():
     pat, pat_classic = prompt_for_pat()
-    repo = input("Enter the repository name (e.g., username/repo): ")
+    # get the current repo extracted from the git remote url
+    current_repo = subprocess.check_output(['git', 'config', '--get', 'remote.origin.url']).decode("utf-8").strip().split(":")[-1].replace(".git", "")
+    repo = current_repo
     headers = {
         "Authorization": f"token {pat}",
         "Accept": "application/vnd.github.v3+json"
