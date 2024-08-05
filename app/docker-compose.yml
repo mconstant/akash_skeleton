@@ -4,7 +4,7 @@ services:
     container_name: example-deployment
     environment:
       TOP_SECRET_MESSAGE: $TOP_SECRET_MESSAGE
-    image: xmconstantx/example-deployment:0.0.3
+    image: xmconstantx/example-deployment:0.0.4
     platform: linux/amd64
     ports:
     - 3000:3000
@@ -13,7 +13,7 @@ services:
     container_name: my-ghost
     environment:
       url: https://ghost.tater.cc
-    image: xmconstantx/my-ghost:0.0.3
+    image: xmconstantx/my-ghost:0.0.4
     platform: linux/amd64
     ports:
     - 2368:2368

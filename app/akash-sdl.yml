@@ -52,14 +52,15 @@
     - "port": 3000
       "to":
       - "global": true
-    "image": "xmconstantx/example-deployment:0.0.3"
+    "image": "xmconstantx/example-deployment:0.0.4"
   "my-ghost":
     "env":
-    - "url=https://ghost.tater.cc"
+    - "url='https://ghost.tater.cc'"
     "expose":
-    - "accept": "ghost.tater.cc"
+    - "accept": 
+      - "ghost.tater.cc"
       "port": 2368
       "to":
       - "global": true
-    "image": "xmconstantx/my-ghost:0.0.3"
+    "image": "xmconstantx/my-ghost:0.0.4"
 "version": "2.0"
