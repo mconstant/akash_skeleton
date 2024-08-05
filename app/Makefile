@@ -39,7 +39,6 @@ increment_patch:
 	python3 scripts/increment_version.py PATCH
 
 publish:
-	git diff-index --quiet HEAD
 	NEW_VERSION=$$(python3 scripts/increment_version.py $(VERSION_TYPE)); \
 	$(MAKE) configs; \
 	git add .; \
