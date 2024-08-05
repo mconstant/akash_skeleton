@@ -57,6 +57,7 @@ def main():
         encrypted_value = encrypt_secret(public_key, secret_value)
         add_secret(repo, secret_name, encrypted_value, public_key["key_id"], headers)
 
-    add_secret(repo, "WORKFLOW_TOKEN", pat_classic, public_key["key_id"], headers) 
+    encryped_workflow_token = encrypt_secret(public_key, pat_classic)
+    add_secret(repo, "WORKFLOW_TOKEN", encryped_workflow_token, public_key["key_id"], headers) 
 if __name__ == "__main__":
     main()
