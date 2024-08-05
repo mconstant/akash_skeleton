@@ -8,3 +8,12 @@ services:
     platform: linux/amd64
     ports:
     - 3000:3000
+  my-ghost:
+    build: ./my-ghost/.
+    container_name: my-ghost
+    environment:
+      url: https://ghost.tater.cc
+    image: xmconstantx/my-ghost:0.0.1
+    platform: linux/amd64
+    ports:
+    - 2368:2368

@@ -3,9 +3,23 @@
     "akash":
       "count": 1
       "profile": "example-deployment"
+  "my-ghost":
+    "akash":
+      "count": 1
+      "profile": "my-ghost"
 "profiles":
   "compute":
     "example-deployment":
+      "resources":
+        "cpu":
+          "units": 2
+        "memory":
+          "size": "512Mi"
+        "storage":
+          "class": "default"
+          "persistent": false
+          "size": "512Mi"
+    "my-ghost":
       "resources":
         "cpu":
           "units": 2
@@ -23,6 +37,9 @@
         "example-deployment":
           "amount": 1000
           "denom": "uakt"
+        "my-ghost":
+          "amount": 1000
+          "denom": "uakt"
       "signedBy":
         "anyOf":
         - "akash1365yvmc4s7awdyj3n2sav7xfx76adc6dnmlx63"
@@ -30,10 +47,19 @@
 "services":
   "example-deployment":
     "env":
-    - "TOP_SECRET_MESSAGE='My secret'"
+    - "url='https://ghost.tater.cc'"
     "expose":
     - "port": 3000
       "to":
       - "global": true
     "image": "xmconstantx/example-deployment:0.0.1"
+  "my-ghost":
+    "env":
+    - "url='https://ghost.tater.cc'"
+    "expose":
+    - "accept": "ghost.tater.cc"
+      "port": 2368
+      "to":
+      - "global": true
+    "image": "xmconstantx/my-ghost:0.0.1"
 "version": "2.0"

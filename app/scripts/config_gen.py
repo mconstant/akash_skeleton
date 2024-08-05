@@ -130,7 +130,15 @@ for app in apps:
     service[service_name]['env'] = array_of_env_var_strings
     exposed_ports = []
     for port in app[service_name]['ports']:
-        exposed_ports.append({"port": port['source'], "to": [{'global': port['global']}]})
+        resolved_port = {
+            "port": port['source'], 
+            "to": [
+                {'global': port['global']}
+                ]
+        }
+        if 'accept' in port and port['accept'] is not None:
+            resolved_port['accept'] = port['accept']
+        exposed_ports.append(resolved_port)
     service[service_name]['expose'] = exposed_ports
     akash_sdl_out['services'][service_name] = service[service_name]
     compute =   {
