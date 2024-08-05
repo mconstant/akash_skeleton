@@ -7,7 +7,7 @@ from getpass import getpass
 
 def prompt_for_pat():
     print("To use this script, you need a Fine Grained GitHub Personal Access Token (PAT) with the following scopes:")
-    print("- ability to write to Actions Secrets for this repository") ")
+    print("- ability to write to Actions Secrets for this repository")
     print("You can create a PAT here: https://github.com/settings/tokens")
     pat = getpass("Enter your GitHub Personal Access Token (PAT): ")
     print("Optionally you can also sync with the original template repo")
