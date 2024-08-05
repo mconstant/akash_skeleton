@@ -30,10 +30,10 @@
 "services":
   "example-deployment":
     "env":
-    - "TOP_SECRET_MESSAGE='This is another secret message'"
+    - "TOP_SECRET_MESSAGE='My secret'"
     "expose":
     - "port": 3000
       "to":
       - "global": true
-    "image": "xmconstantx/example-deployment:0.0.0"
+    "image": "xmconstantx/example-deployment:0.0.1"
 "version": "2.0"
