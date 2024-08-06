@@ -18,6 +18,28 @@ jobs:
           COMMIT_MESSAGE=$(git log -1 --pretty=%B)
           echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
 
+      - name: Check for version tags in commit message
+        id: check_version_tags
+        run: |
+          if [[ "$COMMIT_MESSAGE" == *"<"* && "$COMMIT_MESSAGE" == *">"* ]]; then
+            echo "VERSION_TAG_PRESENT=true" >> $GITHUB_ENV
+          else
+            echo "VERSION_TAG_PRESENT=false" >> $GITHUB_ENV
+
+  determine-version-type:
+    runs-on: ubuntu-latest
+    needs: check-commit-message
+    if: env.VERSION_TAG_PRESENT == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Get commit message
+        id: get_commit_message
+        run: |
+          COMMIT_MESSAGE=$(git log -1 --pretty=%B)
+          echo "commit_message=$COMMIT_MESSAGE" >> $GITHUB_ENV
+
       - name: Determine version type
         id: determine_version_type
         run: |
