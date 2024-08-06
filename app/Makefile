@@ -24,7 +24,8 @@ down:
 push: build
 	docker compose push
 
-load_sdl: push
+load_sdl: configs
+	cp akash-sdl.yml ../infra/akash/docker/terraform/akash-sdl.yml
 
 deploy:
 	$(MAKE) publish VERSION_TYPE=$(VERSION_TYPE)

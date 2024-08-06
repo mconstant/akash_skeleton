@@ -33,5 +33,6 @@ jobs:
 
     - name: Build and run Docker Compose
       run: |
+        cd app && make load_sdl && cd ..
         cd infra/akash/docker
         docker compose up akash-destroy
