@@ -7,9 +7,9 @@ default: configs
 initialize_venv:
 	python3 -m venv venv
 	. venv/bin/activate
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
-configs:
+configs: initialize_venv
 	python3 scripts/config_gen.py
 
 build: configs
